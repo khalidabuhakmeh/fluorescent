@@ -7,6 +7,8 @@ Use RouteTables to generate a JavaSciprt object with routes for client side use.
 
 You first need to define your structure using the fluent interface. The object you define in C# will look like the final JavaScript object, so feel free to nest (or not) your structure the way you like. Also feel free to exclude actions that are not relevant to your client.
 
+**Currently this is designed to work with ASP.NET MVC exclusively, but could be tweaked to work with anything that uses RouteTables / RouteCollections. That includes ASP.NET WebForms and WebAPI.**
+
 The following C# code:
 
 ```CSharp
