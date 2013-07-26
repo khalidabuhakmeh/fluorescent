@@ -70,6 +70,5 @@ namespace Fluorescent.Tests
 
             Debug.WriteLine(json);
         }
-
     }
 }

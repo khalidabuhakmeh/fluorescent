@@ -3,6 +3,14 @@ Fluorescent
 
 Use RouteTables to generate a JavaSciprt object with routes for client side use. Heavily influenced by [Restful Routing](http://restfulrouting.com) and works best in conjunction with it.
 
+## Getting Started
+
+Use NuGet to install the package.
+
+```
+    > Install-Package Fluorescent
+```
+
 ## How To Use
 
 You first need to define your structure using the fluent interface. The object you define in C# will look like the final JavaScript object, so feel free to nest (or not) your structure the way you like. Also feel free to exclude actions that are not relevant to your client.

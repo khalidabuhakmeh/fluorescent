@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Fluorescent</id>
+        <version>0.1.0</version>
+        <title>Fluorescent</title>
+        <authors>khalidabuhakmeh</authors>
+        <owners>khalidabuhakmeh</owners>
+        <licenseUrl>https://github.com/khalidabuhakmeh/fluorescent/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/khalidabuhakmeh/fluorescent</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Use RouteTables to generate a JavaSciprt object with routes for client side use. Heavily influenced by Restful Routing and works best in conjunction with it.</description>
+        <releaseNotes>Initial release. Tested and works with Restful Routing. Might have possible issues if you have parameter constraints.</releaseNotes>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System.Web" targetFramework="" />
+        </frameworkAssemblies>
+    </metadata>
+    <files>
+        <file src="Fluorescent.Core\bin\Release\Fluorescent.Core.dll" target="lib\net40\Fluorescent.Core.dll" />
+        <file src="Fluorescent.Core\bin\Release\Fluorescent.Core.dll" target="lib\net45\Fluorescent.Core.dll" />
+    </files>
+</package>
