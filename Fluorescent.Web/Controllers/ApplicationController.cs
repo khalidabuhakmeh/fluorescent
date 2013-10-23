@@ -2,7 +2,7 @@ using System;
 using System.Web.Mvc;
 using RestfulRouting.Format;
 
-namespace Fluorescent.Tests.Controllers
+namespace Fluorescent.Web.Controllers
 {
     public abstract class ApplicationController : Controller
     {
@@ -14,22 +14,10 @@ namespace Fluorescent.Tests.Controllers
 
     public class BlogsController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
     }
 
     public class GalleriesController : Controller
     {
-    }
-
-    public class HomeController : Controller
-    {
-        public ActionResult Index()
-        {
-            return View();
-        }
     }
 
     public class PostsController : Controller

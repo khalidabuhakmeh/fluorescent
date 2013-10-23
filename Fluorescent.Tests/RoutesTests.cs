@@ -18,7 +18,7 @@ namespace Fluorescent.Tests
         }
 
         [Fact]
-        public void Can_generate_json_object_using_fluent_interface()
+        public void Can_generate_json_object_using_fluent_interface_for_javascript_files()
         {
             var result =
                 Routes.New("Routes", routes =>
@@ -56,6 +56,44 @@ namespace Fluorescent.Tests
         }
 
         [Fact]
+        public void Can_generate_json_object_using_fluent_interface_wrapped_in_a_function()
+        {
+            var result =
+                Routes.New("Routes", routes =>
+                {
+                    routes.Get("root").To("index", "home");
+                    routes.Group("blogs", blogs =>
+                    {
+                        blogs.Get("index").To("index", "blogs");
+                        blogs.Post("show").To("show", "blogs").With("id");
+                        blogs.Get("create").To("create", "blogs");
+                        blogs.Put("update").To("update", "blogs").With("id");
+                        blogs.Delete("destroy").To("destroy", "blogs").With("id");
+
+                        blogs.Group("posts", posts =>
+                        {
+                            posts.Get("show").To("show", "posts").With("blogId", "id");
+                        });
+                    });
+                    routes.Group("gallery", gallery =>
+                    {
+                        gallery.Get("index").To("index", "galleries");
+                    });
+                });
+
+            result.Should().NotBeNull();
+
+            var json = result.ToJson(RouteCollection);
+
+            json.Should().Contain("root");
+            json.Should().Contain("blogs");
+            json.Should().Contain("posts");
+            json.Should().Contain("gallery");
+
+            Debug.WriteLine(json);
+        }
+
+        [Fact]
         public void Can_connect_two_seperate_js_routes()
         {
             var root = Routes.New("Routes", cfg => { });
@@ -67,6 +105,20 @@ namespace Fluorescent.Tests
             root.Connect(blogs);
 
             var json = root.ToJs(RouteCollection);
+            json.Should().Contain("blogs");
+
+            Debug.WriteLine(json);
+        }
+
+        [Fact]
+        public void Can_define_routes_using_types_and_expression()
+        {
+            var blogs = Routes.New("blogs", cfg =>
+            {
+                cfg.Get("index").To<BlogsController>(x => x.Index());
+            });
+
+            var json = blogs.ToJs(RouteCollection);
             json.Should().Contain("blogs");
 
             Debug.WriteLine(json);

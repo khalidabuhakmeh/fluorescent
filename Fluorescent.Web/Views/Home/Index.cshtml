@@ -1,0 +1,20 @@
+﻿@model Fluorescent.Web.Models.HomeModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Check your Web Console</h2>
+
+<script type="text/javascript">
+    /* global variable */
+    @Html.Raw(Model.Routes.ToJs())
+
+    console.log(Routes);
+</script>
+
+<script type="text/javascript">
+    /* into a JSON object */
+    intoAnObject = @Html.Raw(Model.Routes.ToJson())
+    
+    console.log(intoAnObject);
+</script>

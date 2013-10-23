@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Web;
 using System.Web.Routing;
@@ -86,6 +87,15 @@ namespace Fluorescent.Core
                 return this;
             }
 
+            public NodeDefinition To<TController>(Expression<Action<TController>> action, string area = "")
+            {
+                _node.ActionName = (default(TController)).GetMemberName(action);
+                _node.ControllerName = _node.GetControllerName<TController>();
+                _node.AreaName = area;
+
+                return this;
+            }
+
             public NodeDefinition With(params string[] parameters)
             {
                 _node.Parameters = (parameters ?? new string[0]).ToList();
@@ -101,6 +111,15 @@ namespace Fluorescent.Core
             BuildJavaScript(routeCollection, builder, Name);
             AddHelperMethod(builder);
             return builder.ToString();
+        }
+
+        public string ToJson(RouteCollection routeCollection = null)
+        {
+            string template = "function () { var {json}; return {routes} }();"
+                .Replace("{json}", ToJs(routeCollection))
+                .Replace("{routes}", Name);
+
+            return template;
         }
 
         public Node Connect(Node node)
