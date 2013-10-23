@@ -2,6 +2,7 @@
 using System.Web.Routing;
 using FluentAssertions;
 using Fluorescent.Core;
+using Fluorescent.Tests.Controllers;
 using Xunit;
 
 namespace Fluorescent.Tests
@@ -69,6 +70,20 @@ namespace Fluorescent.Tests
             json.Should().Contain("blogs");
 
             Debug.WriteLine(json);
+        }
+
+        [Fact]
+        public void Can_still_resolve_a_route_that_has_controller_on_the_end()
+        {
+            new Node("blogs").GetControllerName("blogscontroller")
+                .Should().Be("blogs");
+        }
+
+        [Fact]
+        public void Can_get_controller_name_from_type_name()
+        {
+            new Node("blogs").GetControllerName<BlogsController>()
+                .Should().Be("Blogs");
         }
     }
 }

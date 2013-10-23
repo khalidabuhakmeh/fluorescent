@@ -178,5 +178,27 @@ namespace Fluorescent.Core
 
             return HttpUtility.UrlDecode(path.VirtualPath);
         }
+
+        public string GetControllerName<T>()
+        {
+            var controllerName = typeof(T).Name;
+            return GetControllerName(controllerName);
+        }
+
+        public string GetControllerName(string controllerName)
+        {
+            if (string.IsNullOrWhiteSpace(controllerName)) return null;
+
+            return controllerName.EndsWith("Controller", StringComparison.InvariantCultureIgnoreCase) 
+                ? ReplaceLastOccurrence(controllerName, "controller", "") 
+                : controllerName;
+        }
+
+        public static string ReplaceLastOccurrence(string source, string find, string replace)
+        {
+            var place = source.LastIndexOf(find, StringComparison.InvariantCultureIgnoreCase);
+            var result = source.Remove(place, find.Length).Insert(place, replace);
+            return result;
+        }
     }
 }
